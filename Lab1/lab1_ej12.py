@@ -1,15 +1,13 @@
 import math
 
-def sonOrtogonales(x,y):
-    result = True 
+def sonOrtogonales(x,y): 
     cal = (x[0]*y[0]) + (x[1]*y[1])
     if cal == 0:
         print("Son ortogonales")
-        return result
+        return True
     else:
         print("No son ortogonales")
-        result = False
-        return result
+        return False
     
 x = [1, 1.1024074512658109]
 y = [-1, 1/x[1]]
