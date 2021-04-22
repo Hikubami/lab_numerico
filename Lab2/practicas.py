@@ -1,6 +1,8 @@
 import math
+import matplotlib.pyplot as plt
 
-#Actividad 1: 
+
+#Actividad 1: Método de la Secante 
 def rsecante(fun,x0,x1,err,mit):
     f = (fun(x1) - fun(x0)) / (x1-x0)
 
@@ -10,9 +12,6 @@ def rsecante(fun,x0,x1,err,mit):
     k = 0
     
     for k in range(mit):
-       # fp = (fun(x1)-fun(x0))/(x1-x0)    
-        
-       # xn = x1 - fun(x1)/fp
         xn = x1 - fun(x1)*((x1-x0)/(fun(x1)-fun(x0)))
 
         if abs((xn-x0)/xn) < err:
@@ -30,7 +29,7 @@ def rsecante(fun,x0,x1,err,mit):
     return hx,hf,k
 
 
-#Agrego Newton para no subir dos archivos.
+#Método de Newton 
 def rnewton(fun, x0, err, mit):
     f, df = fun(x0)
 
@@ -84,28 +83,50 @@ def busqueda_ceros(fun, x0, x1, err, mit):
     else:
         return new_x[it2]
 
+#Función auxiliar para busqueda_ceros
 def funcion_polinomio(x):
     return (x**3+x-5, 3*(x**2)+1)
 
 
-
-#ACTIVIDAD 3:
-mejor_cero = busqueda_ceros(funcion_polinomio,10,-10,1e-6,15)
-print('El mejor cero es:', mejor_cero, '\n\n')
-
-#ACTIVIDAD 3: Algoritmo de Horner extraído del código de Lab1.
+#ACTIVIDAD 3: Algoritmo de Horner
 def horn(coefs, x0):
 
     n = len(coefs)
-    b = 0#coefs[0]
-    for index in range(n):
-        b = coefs[index] + b * x0
+    result = coefs[0]
+    for index in range(1,n):
+        result = coefs[index] + result * x0
 
-    return b
+    return result
 
-polinomio = horn([1,0,1,-5],mejor_cero) #Polinomio es x³+x-5 == [1,0,1,-5], mejor_cero
-polinomio2 = (horn([3,0,1],mejor_cero)) #La derivada es 3x²+1 [3,0,1]
-first,second = funcion_polinomio(mejor_cero)
-print('Polino es:',polinomio,'Donde polino es horner evaluado en mejor Cero')
-print('Polino2 es:',polinomio2,'Donde polino2 es horner derivado evaluado en mejor Cero')
-print('Es polinomio:',first,'Y es derivada:',second)
+#Llamadas y evaluaciones:
+mejor_cero = busqueda_ceros(funcion_polinomio,10,-10,1e-6,15)
+print('El mejor cero es:', mejor_cero, '\n\n')
+
+polinomio = horn([1,0,1,-5],mejor_cero) #El Polinomio es: x³+x-5 == [1,0,1,-5], mejor_cero
+polinomio2 = (horn([3,0,1],mejor_cero)) #La Derivada es: 3x²+1 == [3,0,1]
+
+print('Polinomio es:',polinomio,'Donde polino es horner evaluado en mejor Cero')
+print('Polinomio2 es:',polinomio2,'Donde polino2 es horner derivado evaluado en mejor Cero')
+
+
+#ACTIVIDAD 4: Gráfico
+#Comienzo con la función
+def funcion_aux(x):
+    return (x**3)+x-5
+
+#Primero Establezco las listas para enfrentar al gráfico:
+x=[-2,-1,0,1,2,3,4]
+y=[funcion_aux(x_i) for x_i in x]
+
+#Continuo con la llamada del método más cercano:
+#o=======================o WARNING o======================o 
+# REVISA POR FAVOR PORQUE EL INTERVALO USADO ES [-2,4]
+# Y TENGO LA DUDA DE SI TIENE QUE SER ESE O [-10,10]
+lx,lf,it = rsecante(funcion_aux,4,-2,1e-6,15)
+
+#Parte para graficar
+plt.title("Polinomio y Método de la Secante")
+plt.plot(lx,lf,"red",label="Secante")
+plt.plot(x,y,label="Polinomio")
+plt.legend()
+plt.show()
