@@ -119,10 +119,7 @@ x=[-2,-1,0,1,2,3,4]
 y=[funcion_aux(x_i) for x_i in x]
 
 #Continuo con la llamada del método más cercano:
-#o=======================o WARNING o======================o 
-# REVISA POR FAVOR PORQUE EL INTERVALO USADO ES [-2,4]
-# Y TENGO LA DUDA DE SI TIENE QUE SER ESE O [-10,10]
-lx,lf,it = rsecante(funcion_aux,4,-2,1e-6,15)
+lx,lf,it = rsecante(funcion_aux,10,-10,1e-6,15)
 
 #Parte para graficar
 plt.title("Polinomio y Método de la Secante")
