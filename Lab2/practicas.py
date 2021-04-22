@@ -97,14 +97,14 @@ print('El mejor cero es:', mejor_cero, '\n\n')
 def horn(coefs, x0):
 
     n = len(coefs)
-    b = coefs[0]
-    for index in range(1,n):
+    b = 0#coefs[0]
+    for index in range(n):
         b = coefs[index] + b * x0
 
     return b
 
 polinomio = horn([1,0,1,-5],mejor_cero) #Polinomio es x³+x-5 == [1,0,1,-5], mejor_cero
-polinomio2 = (horn([3,0,1],mejor_cero)) #Multiplico por 3 ya que la derivada es 3x²+1 [3,0,1]
+polinomio2 = (horn([3,0,1],mejor_cero)) #La derivada es 3x²+1 [3,0,1]
 first,second = funcion_polinomio(mejor_cero)
 print('Polino es:',polinomio,'Donde polino es horner evaluado en mejor Cero')
 print('Polino2 es:',polinomio2,'Donde polino2 es horner derivado evaluado en mejor Cero')
