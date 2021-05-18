@@ -40,4 +40,4 @@ Entre los respectivos gŕaficos, podemos observar que las perdidas de paquetes s
 A continuación se observan los gráficos para el caso de estudio Nro. 1 y Nro. 2 con sus respectivos valores mencionados anteriormente, con
 GenerationInterval con un valor de `exponential(0.1)`
 
-![Caso de Estudio 2](/Prueba/img_estudio_2/generationInterval01.png)
+![Caso de Estudio 2](/Prueba/img_estudio_2/generationInterval01.png "Caso de Estudio 2")
